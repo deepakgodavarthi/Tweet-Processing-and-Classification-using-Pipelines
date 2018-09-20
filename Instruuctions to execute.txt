@@ -1,0 +1,24 @@
+Generating the Jar in Intellij:
+1. Import the project on Intellij
+2. Go to View > Tool Windows > sbt > mlprojects > sbt tasks > package
+3. A jar will be generated in the Target folder with the name ml_2.11-0.1.jar.
+
+
+Executing the Jar on AWS:
+Upload Tweets.csv and ml_2.11-0.1.jar onto an S3 bucket on AWS.
+
+PART 1:
+1. Create a Cluster on AWS EMR.
+2. Add a step
+3. Select Step type -> Spark Application
+   Type --class "Part1" in Spark-submit options
+   Select Jar Location as the location of the Jar in S3 bucket.
+   There are two input arguments:
+	1 Path of Tweets.csv in S3 bucket.
+	2 Path of Output folder in S3 bucket.
+	E.g: s3://vxg161330/Tweets.csv
+	     s3://vxg161330/Output/Part1
+   Put action on failure as Continue and add this step.
+4. The output text file will be created in the Output folder in S3 bucket.
+
+
